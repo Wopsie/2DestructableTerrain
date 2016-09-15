@@ -11,6 +11,9 @@ public class DestructionZoner : MonoBehaviour {
     [SerializeField]
     private float destructionRadius;
 
+    public delegate void ExplosionCaller();
+    public ExplosionCaller CallExplosion;
+
     void Start()
     {
         //cc2D.enabled = false;
@@ -19,12 +22,22 @@ public class DestructionZoner : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+        
         if(coll.gameObject.tag == "Ground")
         {
             //call the DestroyTerrain method on the object collision happened with, give radius of cc2D collider as blast radius.
+
+            //spawn circle with solid color
+
             ExecuteExtention.Execute<IDestructable2D>(coll.gameObject, x => x.DestroyTerrain(cc2D));
-            Destroy(gameObject);
+
+            if (CallExplosion != null)
+            {
+                CallExplosion();
+            }
+
+
+            //Destroy(gameObject);
         }
     }
-
 }

@@ -30,7 +30,6 @@ public class DestructionExplosion : MonoBehaviour {
         bomb.CallExplosion -= Explode;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         gameObject.transform.localScale = new Vector3(1, 1, 1);
-        Debug.Log(gameObject.transform.localScale);
         Detonated = true;
     }
 

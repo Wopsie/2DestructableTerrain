@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class AddToScore : MonoBehaviour , IDestructable2D{
 
     [SerializeField]
-    private Text scoreText;
+    private Score score;
 
     public void DestroyTerrain(CircleCollider2D radius) { }
 
     public void AddPoints(int points)
     {
-        //scoreText = "Score : " + points;
-
+        score.IncrementScore();
         Destroy(gameObject);
     }
 }

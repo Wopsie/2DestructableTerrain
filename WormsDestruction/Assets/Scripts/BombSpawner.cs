@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//this script spawns an object (this case bomb) at the mouse position when clicked
 public class BombSpawner : MonoBehaviour {
 
     public GameObject bomb;
-
 
     void Update()
     {

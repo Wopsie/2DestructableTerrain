@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 
 //This script is to be put on a 2D object that can be destroyed.
@@ -93,4 +94,6 @@ public class DestructionHandeler : MonoBehaviour, IDestructable2D {
         //v = vector position of bullet collision with ground
         return v;  
     }
+
+    public void AddPoints(int points){}
 }

@@ -22,6 +22,8 @@ public class DestructionExplosion : MonoBehaviour {
         //bomb = GetComponent<DestructionZoner>();
 
         bomb.CallExplosion += Explode;
+
+        
     }
 
 
@@ -31,24 +33,30 @@ public class DestructionExplosion : MonoBehaviour {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         Detonated = true;
+        StartCoroutine(ScaleDown());
     }
 
-    void Update()
+    IEnumerator ScaleDown()
     {
+        Debug.Log("Coroutine started");
         if(Detonated)
         {
-            //transform.localScale = new Vector3(Mathf.Lerp(1f, 0f, 1f), Mathf.Lerp(1f,0f,1f), Mathf.Lerp(1f,0f,1f));
-            gameObject.transform.localScale = transform.localScale - new Vector3(scaleFactor, scaleFactor, scaleFactor);
-
-            if(transform.localScale.x <= 0f)
+            for (int i = 0; i < 30; i++)
             {
-                if(CallDestroy != null)
+                //scale down explosion
+                gameObject.transform.localScale = transform.localScale - new Vector3(scaleFactor, scaleFactor, scaleFactor);
+                Debug.Log("Scaling Down Via Coroutine");
+                //check if explosion is scaled gone
+                if (transform.localScale.x <= 0)
                 {
-                    CallDestroy();
+                    if (CallDestroy != null)
+                    {
+                        CallDestroy();
+                    }
                 }
+
+                yield return null;
             }
         }
-            
     }
-
 }
